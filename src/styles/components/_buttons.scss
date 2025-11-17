@@ -1,0 +1,72 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-sm $spacing-md;
+    border-radius: var(--border-radius, $border-radius);
+    border: 1px solid transparent;
+    font-family: var(--font-family-base, $font-family-base);
+    font-size: $font-size-base;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    gap: $spacing-sm;
+
+    &:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    // Варианты кнопок
+    &--primary {
+        @include button-variant(var(--primary-color),
+            white,
+            10%);
+    }
+
+    &--secondary {
+        @include button-variant(var(--secondary-color),
+            white,
+            10%);
+    }
+
+    &--accent {
+        @include button-variant(var(--accent-color),
+            white,
+            10%);
+    }
+
+    &--outline {
+        background-color: transparent;
+        border-color: var(--border-color);
+        color: var(--text-color);
+
+        &:hover:not(:disabled) {
+            background-color: var(--surface-color);
+            border-color: var(--primary-color);
+        }
+    }
+
+    // Размеры
+    &--sm {
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-sm;
+    }
+
+    &--lg {
+        padding: $spacing-md $spacing-lg;
+        font-size: $font-size-lg;
+    }
+
+    // Full width
+    &--block {
+        width: 100%;
+    }
+}

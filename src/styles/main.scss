@@ -1,0 +1,29 @@
+// Импорт абстракций
+@import 'abstracts/variables';
+// @import 'abstracts/mixins';
+// @import 'abstracts/functions';
+// @import 'abstracts/placeholders';
+
+// Импорт базовых стилей
+// @import 'base/reset';
+// @import 'base/typography';
+// @import 'base/global';
+
+// Импорт компонентов
+// @import 'components/buttons';
+// @import 'components/forms';
+// @import 'components/cards';
+
+// Импорт лейаутов
+// @import 'layouts/header';
+// @import 'layouts/sidebar';
+// @import 'layouts/grid';/
+
+// Импорт тем
+// @import 'themes/tenant-theme';
+
+body {
+    font-family: $font-family-base;
+    background-color: $background-color;
+    color: $text-color;
+}
