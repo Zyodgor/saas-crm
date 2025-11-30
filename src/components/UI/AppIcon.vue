@@ -1,10 +1,10 @@
 <template>
-  <component
-    :is="iconComponent"
-    :size="iconSize"
-    :color="color"
+  <div
     :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
-  />
+    :style="{ color }"
+  >
+    <component :is="iconComponent" :size="iconSize" />
+  </div>
 </template>
 
 <script setup lang="ts">

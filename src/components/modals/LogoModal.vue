@@ -164,7 +164,7 @@
           Сбросить
         </AppButton>
         <div class="footer-actions">
-          <AppButton @click="closeModal" variant="outline"> Отмена </AppButton>
+          <AppButton @click="closeModal" variant="secondary"> Отмена </AppButton>
           <AppButton @click="saveAndClose" variant="primary">
             <AppIcon name="Save" size="sm" />
             Сохранить
