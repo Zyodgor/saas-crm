@@ -8,5 +8,3 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-console.log('Supabase configured with URL:', supabaseUrl)

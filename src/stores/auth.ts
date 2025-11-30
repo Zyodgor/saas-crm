@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { supabase } from '@/supabase/client'
+// import { supabase } from '@/supabase/client' // Закомментируйте пока
 import type { User } from '@supabase/supabase-js'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -8,15 +8,15 @@ export const useAuthStore = defineStore('auth', () => {
     const isLoading = ref(false)
 
     const signIn = async (email: string, password: string) => {
-        // Реализация входа
+        console.log('Sign in:', email) // Временно
     }
 
     const signUp = async (email: string, password: string, userData: any) => {
-        // Реализация регистрации
+        console.log('Sign up:', email) // Временно
     }
 
     const signOut = async () => {
-        // Реализация выхода
+        // Временно
     }
 
     return {
