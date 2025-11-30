@@ -1,13 +1,13 @@
 <template>
   <component
     :is="iconComponent"
-    :size="size"
+    :size="iconSize"
     :color="color"
     :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
   />
 </template>
   
-  <script setup lang="ts">
+<script setup lang="ts">
 import { computed } from "vue";
 import * as LucideIcons from "lucide-vue-next";
 
@@ -30,9 +30,27 @@ const iconComponent = computed(() => {
     LucideIcons[iconName as keyof typeof LucideIcons] || LucideIcons.HelpCircle
   );
 });
+
+// Добавляем computed для преобразования string в number
+const iconSize = computed(() => {
+  switch (props.size) {
+    case "xs":
+      return 16;
+    case "sm":
+      return 20;
+    case "md":
+      return 24;
+    case "lg":
+      return 32;
+    case "xl":
+      return 40;
+    default:
+      return 24;
+  }
+});
 </script>
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .app-icon {
   display: inline-block;
   vertical-align: middle;
