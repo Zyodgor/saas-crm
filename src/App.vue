@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useThemeStore } from "@/stores/theme";
 import AppLayout from "@/components/layout/AppLayout.vue";
+import TestSupabase from "@/components/TestSupabase.vue";
 
 const { locale } = useI18n();
 const themeStore = useThemeStore();
@@ -22,6 +23,7 @@ onMounted(() => {
   <div id="app">
     <AppLayout>
       <router-view />
+      <TestSupabase/>
     </AppLayout>
   </div>
 </template>
