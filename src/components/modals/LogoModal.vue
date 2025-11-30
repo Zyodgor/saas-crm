@@ -183,6 +183,15 @@ import AppButton from "@/components/UI/AppButton.vue";
 import AppLogo from "@/components/UI/AppLogo.vue";
 import ModalContainer from "@/components/modals/ModalContainer.vue";
 
+type LogoConfig = {
+  type: "icon" | "image" | "text";
+  iconName?: string;
+  imageUrl?: string;
+  imageData?: string;
+  customText?: string;
+  text?: string;
+};
+
 interface Props {
   isOpen: boolean;
 }
@@ -221,28 +230,23 @@ const availableIcons = [
 ];
 
 const updateLogoType = (type: "icon" | "image" | "text") => {
-  // При смене типа очищаем старые данные
-  const newConfig: Partial<LogoConfig> = { type };
+  const newConfig: LogoConfig = { type };
 
   if (type === "icon") {
-    // Для иконки - устанавливаем дефолтную иконку и очищаем изображение
     newConfig.iconName = "GraduationCap";
     newConfig.imageUrl = undefined;
     newConfig.imageData = undefined;
     newConfig.customText = undefined;
   } else if (type === "image") {
-    // Для изображения - очищаем иконку и кастомный текст
     newConfig.iconName = undefined;
     newConfig.customText = undefined;
   } else if (type === "text") {
-    // Для текста - очищаем все кроме текста
     newConfig.iconName = undefined;
     newConfig.imageUrl = undefined;
     newConfig.imageData = undefined;
   }
 
   logoStore.updateLogo(newConfig);
-  // Обновляем локальные переменные
   customText.value = logoStore.currentLogo.customText || "";
   brandText.value = logoStore.currentLogo.text || "";
 };
@@ -252,7 +256,7 @@ const clearBrandText = () => {
   logoStore.updateLogo({ text: "" });
 };
 
-const updateLogo = (config: any) => {
+const updateLogo = (config: Partial<LogoConfig>) => {
   logoStore.updateLogo(config);
 };
 
@@ -281,14 +285,15 @@ const handleImageUpload = (event: Event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const imageData = e.target?.result as string;
-      logoStore.updateLogo({
+      const newConfig: LogoConfig = {
         type: "image",
         imageData,
         imageUrl: imageData,
-        text: "", // Очищаем текст при загрузке картинки
+        text: "",
         customText: undefined,
-      });
-      // Обновляем локальные переменные
+        iconName: undefined
+      };
+      logoStore.updateLogo(newConfig);
       brandText.value = "";
     };
     reader.onerror = () => {

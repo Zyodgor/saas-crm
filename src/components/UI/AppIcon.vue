@@ -6,7 +6,7 @@
     :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
   />
 </template>
-  
+
 <script setup lang="ts">
 import { computed } from "vue";
 import * as LucideIcons from "lucide-vue-next";
@@ -31,7 +31,6 @@ const iconComponent = computed(() => {
   );
 });
 
-// Добавляем computed для преобразования string в number
 const iconSize = computed(() => {
   switch (props.size) {
     case "xs":
