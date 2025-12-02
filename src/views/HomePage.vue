@@ -101,7 +101,7 @@ const quickActions = ref([
         <AppButton
           v-for="action in quickActions"
           :key="action.labelKey"
-          :variant="action.variant"
+          :variant="action.variant as 'primary' | 'secondary'"
           @click="$router.push(action.route)"
           class="quick-action-btn"
         >
