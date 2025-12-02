@@ -1,10 +1,6 @@
 <template>
   <div class="app-icon-wrapper" :style="{ color }">
-    <component
-      :is="iconComponent"
-      :size="iconSize"
-      :class="`app-icon app-icon--${size}`"
-    />
+    <component :is="iconComponent" :size="iconSize" stroke-width="2" />
   </div>
 </template>
 
@@ -51,28 +47,30 @@ const iconSize = computed(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
 
-.app-icon {
-  display: block;
+  svg {
+    display: block;
+    stroke: currentColor;
+    fill: none;
+  }
 
-  &--xs {
+  &.app-icon-wrapper--xs svg {
     width: 16px;
     height: 16px;
   }
-  &--sm {
+  &.app-icon-wrapper--sm svg {
     width: 20px;
     height: 20px;
   }
-  &--md {
+  &.app-icon-wrapper--md svg {
     width: 24px;
     height: 24px;
   }
-  &--lg {
+  &.app-icon-wrapper--lg svg {
     width: 32px;
     height: 32px;
   }
-  &--xl {
+  &.app-icon-wrapper--xl svg {
     width: 40px;
     height: 40px;
   }
