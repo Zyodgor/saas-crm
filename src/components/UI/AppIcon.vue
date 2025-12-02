@@ -1,3 +1,13 @@
+<template>
+  <div class="app-icon-wrapper" :style="{ color }">
+    <component
+      :is="iconComponent"
+      :size="iconSize"
+      :class="`app-icon app-icon--${size}`"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { computed } from "vue";
 import * as LucideIcons from "lucide-vue-next";
@@ -13,7 +23,6 @@ const props = withDefaults(defineProps<Props>(), {
   color: "currentColor",
 });
 
-// Динамически получаем иконку
 const iconComponent = computed(() => {
   const iconName = props.name as keyof typeof LucideIcons;
   return LucideIcons[iconName] || LucideIcons.HelpCircle;
@@ -37,15 +46,6 @@ const iconSize = computed(() => {
 });
 </script>
 
-<template>
-  <component
-    :is="iconComponent"
-    :size="iconSize"
-    :color="color"
-    :class="['app-icon', `app-icon--${size}`]"
-  />
-</template>
-
 <style lang="scss" scoped>
 .app-icon-wrapper {
   display: inline-flex;
@@ -55,6 +55,26 @@ const iconSize = computed(() => {
 
 .app-icon {
   display: block;
-  flex-shrink: 0;
+
+  &--xs {
+    width: 16px;
+    height: 16px;
+  }
+  &--sm {
+    width: 20px;
+    height: 20px;
+  }
+  &--md {
+    width: 24px;
+    height: 24px;
+  }
+  &--lg {
+    width: 32px;
+    height: 32px;
+  }
+  &--xl {
+    width: 40px;
+    height: 40px;
+  }
 }
 </style>
