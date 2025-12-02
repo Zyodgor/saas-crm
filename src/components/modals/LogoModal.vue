@@ -47,7 +47,7 @@
                   'type-option',
                   { 'type-option--active': currentLogo.type === type.value },
                 ]"
-                @click="updateLogoType(type.value)"
+                @click="updateLogoType(type.value as 'icon' | 'image' | 'text')"
               >
                 <AppIcon :name="type.icon" size="md" />
                 <span>{{ type.label }}</span>

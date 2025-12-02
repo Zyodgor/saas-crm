@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div
     :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
     :style="{ color }"
@@ -78,5 +78,50 @@ const iconSize = computed(() => {
     width: 40px;
     height: 40px;
   }
+}
+</style> -->
+
+<template>
+  <div 
+    :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
+    :style="{ color, width: iconSize + 'px', height: iconSize + 'px' }"
+  >
+    <!-- Простой рендеринг без component is -->
+    {{ name }}
+  </div>
+</template>
+
+<script setup lang="ts">
+interface Props {
+  name: string;
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  color?: string;
+  variant?: "default" | "outline" | "filled";
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: "md",
+  color: "currentColor",
+  variant: "default",
+});
+
+const iconSize = {
+  xs: 16,
+  sm: 20,
+  md: 24,
+  lg: 32,
+  xl: 40
+}[props.size] || 24;
+</script>
+
+<style lang="scss" scoped>
+.app-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
 }
 </style>
