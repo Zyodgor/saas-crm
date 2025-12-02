@@ -1,43 +1,128 @@
 <template>
-  <div class="app-icon-wrapper" :style="{ color }">
+  <div class="app-icon-wrapper">
     <component
       :is="getIconComponent"
       :size="iconSize"
-      :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
+      :color="color"
+      class="app-icon"
+      :style="{ width: iconSize + 'px', height: iconSize + 'px' }"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import * as LucideIcons from "lucide-vue-next";
+
+// Импортируем ТОЛЬКО нужные иконки
+import {
+  HelpCircle,
+  Home,
+  Users,
+  BookOpen,
+  Calendar,
+  CreditCard,
+  BarChart3,
+  Settings,
+  ChevronLeft,
+  ChevronRight,
+  Sun,
+  Moon,
+  Languages,
+  UserPlus,
+  CalendarPlus,
+  TrendingUp,
+  Minus,
+  Upload,
+  Trash2,
+  X,
+  RotateCcw,
+  Save,
+  GraduationCap,
+  School,
+  Lightbulb,
+  Rocket,
+  Target,
+  Award,
+  Heart,
+  Star,
+  Image,
+  Type,
+} from "lucide-vue-next";
 
 interface Props {
   name: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   color?: string;
-  variant?: "default" | "outline" | "filled";
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: "md",
   color: "currentColor",
-  variant: "default",
 });
 
+// Маппинг имен иконок на компоненты
+const iconMap = {
+  // Навигация
+  Home,
+  Users,
+  BookOpen,
+  Calendar,
+  CreditCard,
+  BarChart3,
+  Settings,
+  ChevronLeft,
+  ChevronRight,
+  Sun,
+  Moon,
+  Languages,
+
+  // Действия
+  UserPlus,
+  CalendarPlus,
+  Upload,
+  Trash2,
+  X,
+  RotateCcw,
+  Save,
+
+  // Статистика
+  TrendingUp,
+  Minus,
+
+  // Логотипы
+  GraduationCap,
+  School,
+  Lightbulb,
+  Rocket,
+  Target,
+  Award,
+  Heart,
+  Star,
+  Image,
+  Type,
+
+  // Дефолтная
+  HelpCircle,
+};
+
 const getIconComponent = computed(() => {
-  const iconName = props.name as keyof typeof LucideIcons;
-  return LucideIcons[iconName] || LucideIcons.HelpCircle;
+  return iconMap[props.name as keyof typeof iconMap] || HelpCircle;
 });
 
 const iconSize = computed(() => {
   switch (props.size) {
-    case "xs": return 16;
-    case "sm": return 20;
-    case "md": return 24;
-    case "lg": return 32;
-    case "xl": return 40;
-    default: return 24;
+    case "xs":
+      return 16;
+    case "sm":
+      return 20;
+    case "md":
+      return 24;
+    case "lg":
+      return 32;
+    case "xl":
+      return 40;
+    default:
+      return 24;
   }
 });
 </script>
@@ -51,11 +136,6 @@ const iconSize = computed(() => {
 
 .app-icon {
   display: block;
-
-  &--xs { width: 16px; height: 16px; }
-  &--sm { width: 20px; height: 20px; }
-  &--md { width: 24px; height: 24px; }
-  &--lg { width: 32px; height: 32px; }
-  &--xl { width: 40px; height: 40px; }
+  flex-shrink: 0;
 }
 </style>
