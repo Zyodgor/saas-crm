@@ -1,9 +1,10 @@
-<!-- <template>
-  <div
-    :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
-    :style="{ color }"
-  >
-    <component :is="iconComponent" :size="iconSize" />
+<template>
+  <div class="app-icon-wrapper" :style="{ color }">
+    <component
+      :is="getIconComponent"
+      :size="iconSize"
+      :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
+    />
   </div>
 </template>
 
@@ -24,104 +25,37 @@ const props = withDefaults(defineProps<Props>(), {
   variant: "default",
 });
 
-const iconComponent = computed(() => {
-  const iconName = `${props.name}`;
-  return (
-    LucideIcons[iconName as keyof typeof LucideIcons] || LucideIcons.HelpCircle
-  );
+const getIconComponent = computed(() => {
+  const iconName = props.name as keyof typeof LucideIcons;
+  return LucideIcons[iconName] || LucideIcons.HelpCircle;
 });
 
 const iconSize = computed(() => {
   switch (props.size) {
-    case "xs":
-      return 16;
-    case "sm":
-      return 20;
-    case "md":
-      return 24;
-    case "lg":
-      return 32;
-    case "xl":
-      return 40;
-    default:
-      return 24;
+    case "xs": return 16;
+    case "sm": return 20;
+    case "md": return 24;
+    case "lg": return 32;
+    case "xl": return 40;
+    default: return 24;
   }
 });
 </script>
-  
-<style lang="scss" scoped>
-.app-icon {
-  display: inline-block;
-  vertical-align: middle;
-
-  &--xs {
-    width: 16px;
-    height: 16px;
-  }
-
-  &--sm {
-    width: 20px;
-    height: 20px;
-  }
-
-  &--md {
-    width: 24px;
-    height: 24px;
-  }
-
-  &--lg {
-    width: 32px;
-    height: 32px;
-  }
-
-  &--xl {
-    width: 40px;
-    height: 40px;
-  }
-}
-</style> -->
-
-<template>
-  <div 
-    :class="['app-icon', `app-icon--${size}`, `app-icon--${variant}`]"
-    :style="{ color, width: iconSize + 'px', height: iconSize + 'px' }"
-  >
-    <!-- Простой рендеринг без component is -->
-    {{ name }}
-  </div>
-</template>
-
-<script setup lang="ts">
-interface Props {
-  name: string;
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  color?: string;
-  variant?: "default" | "outline" | "filled";
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  size: "md",
-  color: "currentColor",
-  variant: "default",
-});
-
-const iconSize = {
-  xs: 16,
-  sm: 20,
-  md: 24,
-  lg: 32,
-  xl: 40
-}[props.size] || 24;
-</script>
 
 <style lang="scss" scoped>
-.app-icon {
+.app-icon-wrapper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  vertical-align: middle;
-  font-family: monospace;
-  font-size: 12px;
-  font-weight: bold;
+}
+
+.app-icon {
+  display: block;
+
+  &--xs { width: 16px; height: 16px; }
+  &--sm { width: 20px; height: 20px; }
+  &--md { width: 24px; height: 24px; }
+  &--lg { width: 32px; height: 32px; }
+  &--xl { width: 40px; height: 40px; }
 }
 </style>

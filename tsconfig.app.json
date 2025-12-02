@@ -12,6 +12,7 @@
 
     /* Linting - ВРЕМЕННО ОТКЛЮЧАЕМ */
     "strict": false,
+    "skipLibCheck": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitAny": false,
