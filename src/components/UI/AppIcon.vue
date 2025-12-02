@@ -1,53 +1,6 @@
-<template>
-  <div class="app-icon-wrapper">
-    <component
-      :is="getIconComponent"
-      :size="iconSize"
-      :color="color"
-      class="app-icon"
-      :style="{ width: iconSize + 'px', height: iconSize + 'px' }"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed } from "vue";
-
-// Импортируем ТОЛЬКО нужные иконки
-import {
-  HelpCircle,
-  Home,
-  Users,
-  BookOpen,
-  Calendar,
-  CreditCard,
-  BarChart3,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-  Sun,
-  Moon,
-  Languages,
-  UserPlus,
-  CalendarPlus,
-  TrendingUp,
-  Minus,
-  Upload,
-  Trash2,
-  X,
-  RotateCcw,
-  Save,
-  GraduationCap,
-  School,
-  Lightbulb,
-  Rocket,
-  Target,
-  Award,
-  Heart,
-  Star,
-  Image,
-  Type,
-} from "lucide-vue-next";
+import * as LucideIcons from "lucide-vue-next";
 
 interface Props {
   name: string;
@@ -60,53 +13,10 @@ const props = withDefaults(defineProps<Props>(), {
   color: "currentColor",
 });
 
-// Маппинг имен иконок на компоненты
-const iconMap = {
-  // Навигация
-  Home,
-  Users,
-  BookOpen,
-  Calendar,
-  CreditCard,
-  BarChart3,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-  Sun,
-  Moon,
-  Languages,
-
-  // Действия
-  UserPlus,
-  CalendarPlus,
-  Upload,
-  Trash2,
-  X,
-  RotateCcw,
-  Save,
-
-  // Статистика
-  TrendingUp,
-  Minus,
-
-  // Логотипы
-  GraduationCap,
-  School,
-  Lightbulb,
-  Rocket,
-  Target,
-  Award,
-  Heart,
-  Star,
-  Image,
-  Type,
-
-  // Дефолтная
-  HelpCircle,
-};
-
-const getIconComponent = computed(() => {
-  return iconMap[props.name as keyof typeof iconMap] || HelpCircle;
+// Динамически получаем иконку
+const iconComponent = computed(() => {
+  const iconName = props.name as keyof typeof LucideIcons;
+  return LucideIcons[iconName] || LucideIcons.HelpCircle;
 });
 
 const iconSize = computed(() => {
@@ -126,6 +36,15 @@ const iconSize = computed(() => {
   }
 });
 </script>
+
+<template>
+  <component
+    :is="iconComponent"
+    :size="iconSize"
+    :color="color"
+    :class="['app-icon', `app-icon--${size}`]"
+  />
+</template>
 
 <style lang="scss" scoped>
 .app-icon-wrapper {
